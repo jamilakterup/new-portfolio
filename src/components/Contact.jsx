@@ -3,7 +3,7 @@ import Lottie from 'lottie-react';
 import emailjs from '@emailjs/browser';
 import {useRef, useState} from 'react';
 import {toast} from 'react-hot-toast';
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import {useEffect} from 'react';
 
 
@@ -11,7 +11,6 @@ const Contact = () => {
     const form = useRef();
     // scroll animation functionality===================
     const [isVisible, setIsVisible] = useState(false);
-    const isLargeScreen = window.innerWidth > 992;
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -28,20 +27,29 @@ const Contact = () => {
 
 
     // scroll animation============ 
+    const isLargeScreen = window.innerWidth > 992;
+    let stopAnimationOn;
 
-    const handleScroll = () => {
-        const scrollPosition = window.scrollY;
-        const triggerPosition = 3500;
-
-        if (scrollPosition < triggerPosition) {
-            setIsVisible(false);
-        }
-        else {
-            setIsVisible(true);
-        }
+    if (isLargeScreen) {
+        stopAnimationOn = 3400;
+    }
+    else {
+        stopAnimationOn = 8580;
     }
 
     useEffect(() => {
+
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition < stopAnimationOn) {
+                setIsVisible(false);
+            }
+            else {
+                setIsVisible(true);
+            }
+        }
+
         window.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll", handleScroll);
@@ -51,10 +59,21 @@ const Contact = () => {
 
     return (
         <section className="contact pb-0 -mb-32" id="contact">
-            <div className="main-text">
-                <span>Ask me questions</span>
-                <h2>Contact Me!</h2>
-            </div>
+            <AnimatePresence>
+                <motion.div
+                    initial={isLargeScreen
+                        ? {opacity: 0, x: -100}
+                        : {opacity: 0, x: 0}}
+                    animate={isLargeScreen
+                        ? {opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -100, }
+                        : {opacity: isVisible ? 1 : 0, x: 0}}
+                    className="main-text"
+                    transition={{duration: .8}}
+                >
+                    <span>Ask me questions</span>
+                    <h2>Contact Me!</h2>
+                </motion.div>
+            </AnimatePresence>
 
             <div className='flex md:flex-row flex-col items-center md:gap-24 gap-5 md:mt-12'>
                 <motion.div
@@ -65,7 +84,7 @@ const Contact = () => {
                         ? {opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -100, }
                         : {opacity: isVisible ? 1 : 0, x: 0}}
                     transition={{duration: .8}}
-                    className='md:w-1/2'>
+                    className='md:w-1/2 w-full'>
                     <div>
                         <Lottie animationData={animation} loop={true} />
                     </div>
@@ -79,7 +98,7 @@ const Contact = () => {
                         ? {opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 100, }
                         : {opacity: isVisible ? 1 : 0, x: 0}}
                     transition={{duration: .8}}
-                    className='md:w-1/2'>
+                    className='md:w-1/2 w-full'>
                     <form ref={form} onSubmit={sendEmail}>
                         <div>
                             <label>Name</label>

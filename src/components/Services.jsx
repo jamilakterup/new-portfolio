@@ -6,26 +6,37 @@ import {FiMonitor} from "react-icons/fi";
 const Services = () => {
     // framer motion style===================
     const [isVisible, setIsVisible] = useState(false);
+
     const isLargeScreen = window.innerWidth > 992;
+    let startAnimationOn;
+    let stopAnimationOn;
 
-    const handleScroll = () => {
-        const scrollPosition = window.scrollY;
-        const triggerPosition = 1860;
-
-        if (scrollPosition > triggerPosition || scrollPosition < 850) {
-            setIsVisible(false);
-        }
-        else {
-            setIsVisible(true);
-        }
+    if (isLargeScreen) {
+        startAnimationOn = 923;
+        stopAnimationOn = 1880;
+    }
+    else {
+        startAnimationOn = 1700;
+        stopAnimationOn = 3360;
     }
 
     useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition > stopAnimationOn || scrollPosition < startAnimationOn) {
+                setIsVisible(false);
+            }
+            else {
+                setIsVisible(true);
+            }
+        }
+
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
-    }, [])
+    }, [startAnimationOn, stopAnimationOn])
 
 
 

@@ -8,7 +8,6 @@ import {AnimatePresence, motion} from 'framer-motion';
 const Home = () => {
     // framer motion animation added---------
     const [isVisible, setIsVisible] = useState(true);
-    const isLargeScreen = window.innerWidth > 992;
 
 
     useEffect(() => {
@@ -71,25 +70,34 @@ const Home = () => {
 
 
     //    framer motion animation added====================
+    const isLargeScreen = window.innerWidth > 992;
+    let stopAnimationOn;
 
-    const handleScroll = () => {
-        const scrollPosition = window.scrollY;
-        const triggerPosition = 280;
-
-        if (scrollPosition > triggerPosition) {
-            setIsVisible(false);
-        } else {
-            setIsVisible(true);
-        }
-    };
+    if (isLargeScreen) {
+        stopAnimationOn = 380;
+    }
+    else {
+        stopAnimationOn = 840;
+    }
 
     // Attach the scroll event listener
     useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            console.log(scrollPosition);
+
+            if (scrollPosition > stopAnimationOn) {
+                setIsVisible(false);
+            } else {
+                setIsVisible(true);
+            }
+        };
+
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [stopAnimationOn]);
 
 
 
@@ -117,7 +125,7 @@ const Home = () => {
                         <a href="mailto:jamilakterup@gmail.com" className="btn">Hire Me Now</a>
                     </div>
 
-                    <div className="social-icons md:mt-[4rem] flex flex-wrap justify-between md:w-[320px] h-10">
+                    <div className="social-icons mt-[4rem] flex flex-wrap md:gap-0 gap-8 md:justify-between md:w-[320px] h-10">
                         {icons}
                     </div>
                 </motion.div>

@@ -7,25 +7,34 @@ const About = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const isLargeScreen = window.innerWidth > 992;
+    let startAnimationOn;
+    let stopAnimationOn;
 
-    const handleScroll = () => {
-        const scrollPosition = window.scrollY;
-        const triggerPosition = 980;
-
-        if (scrollPosition > triggerPosition || scrollPosition < 270) {
-            setIsVisible(false);
-        }
-        else {
-            setIsVisible(true);
-        }
+    if (isLargeScreen) {
+        startAnimationOn = 370;
+        stopAnimationOn = 1022;
+    }
+    else {
+        startAnimationOn = 770;
+        stopAnimationOn = 1740;
     }
 
     useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > stopAnimationOn || scrollPosition < startAnimationOn) {
+                setIsVisible(false);
+            }
+            else {
+                setIsVisible(true);
+            }
+        }
+
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
-    }, [])
+    }, [startAnimationOn, stopAnimationOn])
 
 
 

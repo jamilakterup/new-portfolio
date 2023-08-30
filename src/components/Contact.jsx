@@ -5,7 +5,6 @@ import {useRef, useState} from 'react';
 import {toast} from 'react-hot-toast';
 import {motion} from "framer-motion";
 import {useEffect} from 'react';
-import LightSpeed from 'react-reveal/LightSpeed';
 
 
 const Contact = () => {
@@ -33,7 +32,7 @@ const Contact = () => {
     const handleScroll = () => {
         const scrollPosition = window.scrollY;
         const triggerPosition = 3500;
-        console.log(scrollPosition);
+
         if (scrollPosition < triggerPosition) {
             setIsVisible(false);
         }
@@ -52,12 +51,10 @@ const Contact = () => {
 
     return (
         <section className="contact pb-0 -mb-32" id="contact">
-            <LightSpeed left opposite when={isVisible}>
-                <div className="main-text">
-                    <span>Ask me questions</span>
-                    <h2>Contact Me!</h2>
-                </div>
-            </LightSpeed>
+            <div className="main-text">
+                <span>Ask me questions</span>
+                <h2>Contact Me!</h2>
+            </div>
 
             <div className='flex md:flex-row flex-col items-center md:gap-24 gap-5 md:mt-12'>
                 <motion.div

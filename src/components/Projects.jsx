@@ -3,12 +3,19 @@ import {projects} from "../data";
 import {AnimatePresence} from "framer-motion";
 import ProjectsCard from "./ProjectsCard";
 // import {FiExternalLink} from "react-icons/fi";
+import LightSpeed from 'react-reveal/LightSpeed';
+import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
+
 
 const Projects = () => {
     const [clickedValue, setClickedValue] = useState('');
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [isActiveButton, setIsActiveButton] = useState('All');
     // const [modal, setModal] = useState('');
+    // scroll animation functionality===================
+    const [isVisible, setIsVisible] = useState(false);
+    // const isLargeScreen = window.innerWidth > 992;
 
     const uniqueItems = new Set();
     projects.forEach(obj => uniqueItems.add(obj.category));
@@ -33,33 +40,60 @@ const Projects = () => {
     };
 
 
+
+    // scroll animation============ 
+
+    const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        const triggerPosition = 3680;
+
+        if (scrollPosition > triggerPosition || scrollPosition < 2700) {
+            setIsVisible(false);
+        }
+        else {
+            setIsVisible(true);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+    }, [])
+
     // main functionality-----------------------
 
     return (
         <section className="projects" id="projects">
-            <div className="main-text">
-                <span>What I will do for you</span>
-                <h2>Latest projects</h2>
-            </div>
+            <LightSpeed left opposite when={isVisible}>
+                <div className="main-text">
+                    <span>What I will do for you</span>
+                    <h2>Latest projects</h2>
+                </div>
+            </LightSpeed>
 
             <div className="container mt-12 flex justify-center items-center flex-wrap gap-4">
                 {
                     uniqueButton?.map((content, i) => (
-                        <Button key={i} text={content} onClick={() => (setClickedValue(content), setIsActiveButton(content))} isActive={isActiveButton === `${content}`} />
-
+                        <Zoom key={i} left when={isVisible}>
+                            <Button text={content} onClick={() => (setClickedValue(content), setIsActiveButton(content))} isActive={isActiveButton === `${content}`} />
+                        </Zoom>
                     ))
                 }
             </div>
 
-            <div className="portfolio-projects mt-10">
-                <AnimatePresence>
-                    {
-                        filteredProjects.map((project, i) => (
-                            <ProjectsCard key={i} project={project} />
-                        ))
-                    }
-                </AnimatePresence>
-            </div>
+            <Fade when={isVisible}>
+                <div className="portfolio-projects mt-10">
+                    <AnimatePresence>
+                        {
+                            filteredProjects.map((project, i) => (
+                                <ProjectsCard key={i} project={project} />
+                            ))
+                        }
+                    </AnimatePresence>
+                </div>
+            </Fade>
         </section >
     );
 };

@@ -301,8 +301,8 @@ a.btn:nth-child(2)::before {
 .info-about{
     background: var(--hover-color);
     position: absolute;
-    top: 18%;
-    left: 10%;
+    right: 10%;
+    top: 10%;
     width: 22rem;
     height: 23rem;
     border-radius: 69% 31% 66% 34% / 21% 30% 70% 79%;
@@ -611,7 +611,7 @@ pre{
 
 @media only screen and (max-width: 768px) {
     /* Add this to your CSS */
-.navListOpen {
+    .navListOpen {
     animation: fadeInDown 0.3s ease-in-out;
     }
     
@@ -635,4 +635,109 @@ pre{
     header ul li:last-child a{
         border-bottom: none;
     } 
+    
+    :root {
+        --big-font: 2rem;
+        --normal-font: 1.5rem;
+        --h2-font: 2.8rem;
+    }
+    
+    p{
+        font-size: 15px;
+    }
+    
+    pre{
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (max-width: 638px){
+    .info-about{
+        width: 18rem;
+    }
+    
+    .info-about1,
+    .info-about2 {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .info-about1 {
+        left: 8%;
+    } 
+    
+    :root {
+        --big-font: 1.5rem;
+        --normal-font: 1rem;
+        --h2-font: 2.3rem;
+    }
+    
+    .about-content h3 {
+        font-size: 1rem;
+    }
+    
+    pre,p{
+        font-size: .7em;
+    }
+    
+    .modal-div{
+        max-width: 400px;
+    }
+    
+    .modal-img {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 394px){
+    .about .img-about img {
+        max-width: 300px;
+        margin-left: -20px;
+    }
+    
+    .btn-box{
+        flex-direction: column;
+        width: 150px;
+        gap: 10px;
+        margin: 0 auto 90px;
+    }
+    
+    .man-img{
+        height: 20rem;
+        left: -10px;
+    }
+    
+    .info-about{
+        top: 2%;
+        left: 17px;
+        width: 13rem;
+        height: 17rem;
+    }
+    
+    .info-about1{
+        top: 70%;
+        left: 2%;
+    }
+    
+    .info-about2{
+        top: 20%;
+        left: 65%;
+    }
+}
+
+
+
+.parallax-effect-glare-scale {
+    background-color: #90c3ca2d;
+    border-radius: 15px;
+    transform-style: preserve-3d;
+    height: 180px;
+}
+
+
+.parallax-effect-glare-scale .inner-element {
+    font-style: italic;
+    transform: translateZ(60px);
 }

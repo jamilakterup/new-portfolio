@@ -47,7 +47,7 @@ const NavBar = () => {
             <header className='navbar flex justify-between items-center fixed backdrop-blur-lg w-full z-50'>
                 <img className='h-10 w-8' src={logo} alt="" />
 
-                <ul className={`md:flex md:space-x-12 list-none ${isOpen ? 'block absolute top-[70px] left-0 w-full px-8 py-2 bg-slate-500 navListOpen' : 'hidden'} md:block navList`}>
+                <ul className={`md:flex md:space-x-12 list-none ${isOpen ? 'block absolute top-[70px] left-0 w-full md:px-8 py-2 bg-slate-500 navListOpen' : 'hidden'} md:block navList`}>
                     <li><a href="#home" className={activeLink === 'home' ? 'active' : ''} onClick={() => setActiveLink('home')}>Home</a></li>
 
                     <li><a href="#about" className={activeLink === 'about' ? 'active' : ''} onClick={() => setActiveLink('about')}>About</a></li>

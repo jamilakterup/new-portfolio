@@ -1,13 +1,18 @@
 import animation from '../assets/animation_llpe1p9d.json';
 import Lottie from 'lottie-react';
 import emailjs from '@emailjs/browser';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import {toast} from 'react-hot-toast';
-
+import {motion} from "framer-motion";
+import {useEffect} from 'react';
+import LightSpeed from 'react-reveal/LightSpeed';
 
 
 const Contact = () => {
     const form = useRef();
+    // scroll animation functionality===================
+    const [isVisible, setIsVisible] = useState(false);
+    const isLargeScreen = window.innerWidth > 992;
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -23,36 +28,80 @@ const Contact = () => {
     };
 
 
+    // scroll animation============ 
+
+    const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        const triggerPosition = 3500;
+        console.log(scrollPosition);
+        if (scrollPosition < triggerPosition) {
+            setIsVisible(false);
+        }
+        else {
+            setIsVisible(true);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+    }, [])
+
+
     return (
         <section className="contact pb-0 -mb-32" id="contact">
-            <div className="main-text">
-                <span>Ask me questions</span>
-                <h2>Contact Me!</h2>
-            </div>
+            <LightSpeed left opposite when={isVisible}>
+                <div className="main-text">
+                    <span>Ask me questions</span>
+                    <h2>Contact Me!</h2>
+                </div>
+            </LightSpeed>
 
             <div className='flex md:flex-row flex-col items-center md:gap-24 gap-5 md:mt-12'>
-                <div className='md:w-1/2'>
-                    <Lottie animationData={animation} loop={true} />
-                </div>
+                <motion.div
+                    initial={isLargeScreen
+                        ? {opacity: 0, x: -100}
+                        : {opacity: 0, x: 0}}
+                    animate={isLargeScreen
+                        ? {opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -100, }
+                        : {opacity: isVisible ? 1 : 0, x: 0}}
+                    transition={{duration: .8}}
+                    className='md:w-1/2'>
+                    <div>
+                        <Lottie animationData={animation} loop={true} />
+                    </div>
+                </motion.div>
 
-                <form ref={form} onSubmit={sendEmail} className='md:w-1/2 w-full'>
-                    <div>
-                        <label>Name</label>
-                        <input className='w-full mb-5 p-2 rounded-md input-box' type="text" name="user_name" required />
-                    </div>
-                    <div>
-                        <label>Email</label>
-                        <input className='w-full mb-5 p-2 rounded-md input-box' type="email" name="user_email" required />
-                    </div>
-                    <div>
-                        <label>Message</label>
-                        <textarea className='w-full mb-5 p-2 rounded-md resize-none input-box' rows='6' name="message" required />
-                    </div>
+                <motion.div
+                    initial={isLargeScreen
+                        ? {opacity: 0, x: 100}
+                        : {opacity: 0, x: 0}}
+                    animate={isLargeScreen
+                        ? {opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 100, }
+                        : {opacity: isVisible ? 1 : 0, x: 0}}
+                    transition={{duration: .8}}
+                    className='md:w-1/2'>
+                    <form ref={form} onSubmit={sendEmail}>
+                        <div>
+                            <label>Name</label>
+                            <input className='w-full mb-5 p-2 rounded-md input-box' type="text" name="user_name" required />
+                        </div>
+                        <div>
+                            <label>Email</label>
+                            <input className='w-full mb-5 p-2 rounded-md input-box' type="email" name="user_email" required />
+                        </div>
+                        <div>
+                            <label>Message</label>
+                            <textarea className='w-full mb-5 p-2 rounded-md resize-none input-box' rows='6' name="message" required />
+                        </div>
 
-                    <button type="submit" defaultValue="Send" className={'projects-btn h-9'}>
-                        <a className="single-btn">Send Message</a>
-                    </button>
-                </form>
+                        <button type="submit" defaultValue="Send" className={'projects-btn md:h-9'}>
+                            <a className="single-btn">Send Message</a>
+                        </button>
+                    </form>
+                </motion.div>
             </div>
         </section>
     );

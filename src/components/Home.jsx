@@ -1,9 +1,16 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import img from '../assets/me-1.png';
 import CV from '../assets/jamil_MERNstack-resume.pdf';
 import {FaFacebookF, FaInstagram, FaLinkedin, FaGithub, FaDownload} from "react-icons/fa";
+// framer motion animation added---------
+import {AnimatePresence, motion} from 'framer-motion';
 
 const Home = () => {
+    // framer motion animation added---------
+    const [isVisible, setIsVisible] = useState(true);
+    const isLargeScreen = window.innerWidth > 992;
+
+
     useEffect(() => {
         let words = document.querySelectorAll('.word');
 
@@ -62,33 +69,73 @@ const Home = () => {
         <a href="https://github.com/jamilakterup"><FaGithub className='icon' /></a>
     </>
 
+
+    //    framer motion animation added====================
+
+    const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        const triggerPosition = 280;
+
+        if (scrollPosition > triggerPosition) {
+            setIsVisible(false);
+        } else {
+            setIsVisible(true);
+        }
+    };
+
+    // Attach the scroll event listener
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
+
     return (
         <section id="home" className="home grid md:grid-cols-2 min-h-screen items-center">
-            <div className="home-content">
-                <h1 className='text-5xl font-semibold'>Hi! {"I'm"} <span>Jamil</span></h1>
-                <div className="change-text text-2xl font-semibold">
-                    <h3 className='pe-2'>And {"I'm"} </h3>
-                    <h3>{items}</h3>
-                </div>
-                <p className='text-[#dbdbdb] leading-relaxed my-5 indent-12 first-letter:text-4xl text-justify font-mono'>I am a passionate and skilled MERN stack developer with expertise in HTML, CSS, Bootstrap, Tailwind, JavaScript (ES6+), React, Express, Node.js, MongoDB, Firebase, and Vercel. My journey in the world of web development began with an ardent fascination for creating dynamic and user-friendly interfaces.</p>
-
-                <div className="btn-box flex justify-between w-80 h-11">
-                    <a href={CV} download='' className="btn"><FaDownload className="icon" /> Download CV</a>
-                    <a href="mailto:jamilakterup@gmail.com" className="btn">Hire Me Now</a>
-                </div>
-
-                <div className="social-icons mt-[4rem] flex justify-between w-[320px] h-10">
-                    {icons}
-                </div>
-            </div>
-
-            <div className="home-image mt-12 md:mt-0 justify-self-center md:justify-self-end">
-                <div className="img-box">
-                    <img className='relative z-10 man-img' src={img} alt="" />
-                    <div className="info-about">
+            <AnimatePresence>
+                <motion.div
+                    initial={isLargeScreen
+                        ? {opacity: 0, x: -100}
+                        : {opacity: 0, x: 0}}
+                    animate={isLargeScreen
+                        ? {opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -100, }
+                        : {opacity: isVisible ? 1 : 0, x: 0}}
+                    transition={{duration: 0.8}}
+                    className="home-content">
+                    <h1 className='text-3xl md:text-5xl font-semibold'>Hi! {"I'm"} <span>Jamil</span></h1>
+                    <div className="change-text md:text-2xl font-semibold">
+                        <h3 className='pe-2'>And {"I'm"} </h3>
+                        <h3>{items}</h3>
                     </div>
+                    <p className='home-text text-[#dbdbdb] leading-relaxed my-5 indent-12 first-letter:text-4xl text-justify font-mono'>I am a passionate and skilled MERN stack developer with expertise in HTML, CSS, Bootstrap, Tailwind, JavaScript (ES6+), React, Express, Node.js, MongoDB, Firebase, and Vercel. My journey in the world of web development began with an ardent fascination for creating dynamic and user-friendly interfaces.</p>
+
+                    <div className="btn-box flex justify-between w-80 h-11">
+                        <a href={CV} download='' className="btn"><FaDownload className="icon" /> Download CV</a>
+                        <a href="mailto:jamilakterup@gmail.com" className="btn">Hire Me Now</a>
+                    </div>
+
+                    <div className="social-icons md:mt-[4rem] flex flex-wrap justify-between md:w-[320px] h-10">
+                        {icons}
+                    </div>
+                </motion.div>
+            </AnimatePresence>
+
+            <motion.div
+                initial={isLargeScreen
+                    ? {opacity: 0, x: 100}
+                    : {opacity: 0, x: 0}}
+                animate={isLargeScreen
+                    ? {opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 100, }
+                    : {opacity: isVisible ? 1 : 0, x: 0}}
+                transition={{duration: 0.8}} className="home-image mt-12 md:mt-0 justify-self-center md:justify-self-end">
+                <div>
+                    <img className='relative z-10 man-img' src={img} alt="" />
+                    <div className="info-about"></div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

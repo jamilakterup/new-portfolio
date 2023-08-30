@@ -84,7 +84,6 @@ const Home = () => {
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
-            console.log(scrollPosition);
 
             if (scrollPosition > stopAnimationOn) {
                 setIsVisible(false);

@@ -51,7 +51,7 @@ const About = () => {
                     transition={{duration: .8}}
                     className="img-about">
                     <img src={image} alt="" />
-                    <div className="info-about1">
+                    <div className="info-about1 ms-4">
                         <span>1+</span>
                         <p>Year of experience</p>
                     </div>

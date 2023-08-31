@@ -38,6 +38,26 @@ body {
     color: var(--text-color);
 }
 
+
+.navList a{
+    display: inline-block;
+    animation: slideAnimation 1s forwards ease;
+    animation-delay: calc(.3s * var(--i));
+    opacity: 0;
+}
+
+@keyframes slideAnimation {
+    0%{
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .navList a:hover {
     color: var(--hover-color);
     text-shadow: var(--font-neon-text-shadow);
@@ -265,6 +285,17 @@ a.btn:nth-child(2)::before {
 .about .img-about {
     text-align: center;
     position: relative;
+}
+
+.about .img-about{
+    border-left: 2px solid var(--text-color);
+    animation: blinking 1s infinite;
+}
+
+@keyframes blinking {
+    50%{
+        border-color: #292e33;
+    }
 }
 
 .about .img-about img {

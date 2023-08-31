@@ -34,7 +34,7 @@ const Contact = () => {
         stopAnimationOn = 3400;
     }
     else {
-        stopAnimationOn = 8580;
+        stopAnimationOn = 8880;
     }
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const Contact = () => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         }
-    }, [])
+    }, [stopAnimationOn])
 
 
     return (

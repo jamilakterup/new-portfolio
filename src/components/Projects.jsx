@@ -45,8 +45,8 @@ const Projects = () => {
         stopAnimationOn = 3650;
     }
     else {
-        startAnimationOn = 6360;
-        stopAnimationOn = 8655;
+        startAnimationOn = 6560;
+        stopAnimationOn = 8948;
     }
 
     useEffect(() => {

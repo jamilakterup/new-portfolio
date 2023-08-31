@@ -16,8 +16,8 @@ const Skills = () => {
         stopAnimationOn = 2700;
     }
     else {
-        startAnimationOn = 3250;
-        stopAnimationOn = 6460;
+        startAnimationOn = 3450;
+        stopAnimationOn = 6660;
     }
 
     useEffect(() => {

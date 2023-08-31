@@ -17,7 +17,7 @@ const Services = () => {
     }
     else {
         startAnimationOn = 1700;
-        stopAnimationOn = 3360;
+        stopAnimationOn = 3560;
     }
 
     useEffect(() => {

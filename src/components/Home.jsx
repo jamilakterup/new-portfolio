@@ -120,7 +120,7 @@ const Home = () => {
                     <p className='home-text text-[#dbdbdb] leading-relaxed my-5 indent-12 first-letter:text-4xl text-justify font-mono'>I am a passionate and skilled MERN stack developer with expertise in HTML, CSS, Bootstrap, Tailwind, JavaScript (ES6+), React, Express, Node.js, MongoDB, Firebase, and Vercel. My journey in the world of web development began with an ardent fascination for creating dynamic and user-friendly interfaces.</p>
 
                     <div className="btn-box flex justify-between w-80 h-11">
-                        <a href={CV} download='' className="btn"><FaDownload className="icon" /> Download CV</a>
+                        <a href={CV} download='' className="btn"><FaDownload className="animate-bounce" /> Download CV</a>
                         <a href="mailto:jamilakterup@gmail.com" className="btn">Hire Me Now</a>
                     </div>
 

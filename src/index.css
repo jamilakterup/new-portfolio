@@ -90,26 +90,30 @@ body {
     padding-top: 6rem;
 }
 
-.icon {
+/* .icon {
     animation: swipe 1.2s .5s ease-out infinite;
-}
-.social-icons a:nth-child(odd) .icon{
-    animation: swipe 1.2s .8s ease-out infinite;
+} */
+
+.icon {
+    animation: bounce 1s infinite;
 }
 
-@keyframes swipe {
-    0% {
-        transform: translateY(0);
+.social-icons a:nth-child(odd) .icon {
+    animation-delay: .2s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8,0,1,1);
     }
-
     50% {
-        transform: translateY(5px);
-    }
-
-    100% {
-        transform: translateY(0);
+        transform: none;
+        animation-timing-function: cubic-bezier(0,0,0.2,1);
     }
 }
+
+
 
 
 span {

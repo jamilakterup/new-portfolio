@@ -31,7 +31,7 @@ const Contact = () => {
     let stopAnimationOn;
 
     if (isLargeScreen) {
-        stopAnimationOn = 3400;
+        stopAnimationOn = 3300;
     }
     else {
         stopAnimationOn = 8880;

@@ -41,11 +41,11 @@ const Projects = () => {
     let stopAnimationOn;
 
     if (isLargeScreen) {
-        startAnimationOn = 2550;
+        startAnimationOn = 2400;
         stopAnimationOn = 3650;
     }
     else {
-        startAnimationOn = 6560;
+        startAnimationOn = 6540;
         stopAnimationOn = 8948;
     }
 

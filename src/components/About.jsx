@@ -11,11 +11,11 @@ const About = () => {
     let stopAnimationOn;
 
     if (isLargeScreen) {
-        startAnimationOn = 370;
+        startAnimationOn = 200;
         stopAnimationOn = 1022;
     }
     else {
-        startAnimationOn = 770;
+        startAnimationOn = 620;
         stopAnimationOn = 1740;
     }
 

@@ -12,11 +12,11 @@ const Skills = () => {
     let stopAnimationOn;
 
     if (isLargeScreen) {
-        startAnimationOn = 1600;
+        startAnimationOn = 1500;
         stopAnimationOn = 2700;
     }
     else {
-        startAnimationOn = 3450;
+        startAnimationOn = 3400;
         stopAnimationOn = 6660;
     }
 

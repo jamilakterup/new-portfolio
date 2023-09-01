@@ -12,11 +12,11 @@ const Services = () => {
     let stopAnimationOn;
 
     if (isLargeScreen) {
-        startAnimationOn = 923;
+        startAnimationOn = 820;
         stopAnimationOn = 1880;
     }
     else {
-        startAnimationOn = 1700;
+        startAnimationOn = 1550;
         stopAnimationOn = 3560;
     }
 
